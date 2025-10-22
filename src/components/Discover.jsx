@@ -1,9 +1,9 @@
 import '../index.css';
 
-const Discover = (banList) => {
+const Discover = ({banList, getImage}) => {
     return (
         <div className="discover-container">
-            <button style={{marginTop: 12}}>
+            <button style={{marginTop: 12}} onClick={getImage}>
                 Discover your new friend!
             </button>
         </div>

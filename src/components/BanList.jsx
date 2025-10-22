@@ -1,6 +1,6 @@
 import '../index.css';
 
-const BanList = (banList) => {
+const BanList = ({banList}) => {
     return (
         <div className="banList">
             <h2>Ban List</h2>
