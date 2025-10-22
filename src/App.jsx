@@ -25,7 +25,6 @@ function App() {
       if (!response.ok) throw new Error(`Response status: ${response.status}`);
 
       const result = await response.json();
-      console.log(API_KEY);
       console.log(result);
       setCurrentImage(result[0].url ?? null);
       setHistory(prev => [...prev, result[0].url]);
