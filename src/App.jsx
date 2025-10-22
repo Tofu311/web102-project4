@@ -4,7 +4,7 @@ import Discover from "./components/Discover";
 import HistoryList from "./components/HistoryList";
 import BanList from "./components/BanList";
 
-const API_KEY = import.meta.env.CAT_API_KEY;
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 function App() {
   const [history, setHistory] = useState([]); // Represents cats that we've seen
@@ -12,19 +12,20 @@ function App() {
   const [currentImage, setCurrentImage] = useState(null);
 
   const getImage = async () => {
-    const url = "https://api.thecatapi.com/v1/images/search/?limit=1&has_breeds=1";
+    const url = 'https://api.thecatapi.com/v1/images/search?limit=1&has_breeds=1';
 
     try {
       const response = await fetch(url, {
         method: "GET",
         headers: {
-          "x-api-key": API_KEY,
+          "x-api-key": API_KEY
         },
       });
 
       if (!response.ok) throw new Error(`Response status: ${response.status}`);
 
       const result = await response.json();
+      console.log(API_KEY);
       console.log(result);
       setCurrentImage(result[0].url ?? null);
       setHistory(prev => [...prev, result[0].url]);
