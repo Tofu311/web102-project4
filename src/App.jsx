@@ -12,7 +12,7 @@ function App() {
   const [currentImage, setCurrentImage] = useState(null);
 
   const getImage = async () => {
-    const url = "https://api.thecatapi.com/v1/images/search";
+    const url = "https://api.thecatapi.com/v1/images/search/?limit=1&has_breeds=1";
 
     try {
       const response = await fetch(url, {
@@ -25,9 +25,9 @@ function App() {
       if (!response.ok) throw new Error(`Response status: ${response.status}`);
 
       const result = await response.json();
-
-      // Currently log to the console for debugging purposes, remove later
       console.log(result);
+      setCurrentImage(result[0].url ?? null);
+      setHistory(prev => [...prev, result[0].url]);
     } catch (error) {
       console.error(error.message);
     }
@@ -38,8 +38,8 @@ function App() {
       <h1>Cat Tinder</h1>
       <h3>Find your new non-human child</h3>
       😻
-      <Discover getImage={getImage} />
-      <HistoryList />
+      <Discover getImage={getImage} currentImage={currentImage}/>
+      <HistoryList history={history}/>
       <BanList />
     </>
   );
